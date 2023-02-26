@@ -56,6 +56,10 @@ const userSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		isMentorVerified: {
+			type: Boolean,
+			default: false,
+		},
 		deleted: {
 			type: Boolean,
 			default: false,

@@ -50,6 +50,7 @@ module.exports = class AccountHelper {
 		try {
 			const email = bodyData.email.toLowerCase()
 			let user = await usersData.findOne({ 'email.address': email })
+			console.log(user)
 			if (user) {
 				return common.failureResponse({
 					message: 'USER_ALREADY_EXISTS',
@@ -174,6 +175,7 @@ module.exports = class AccountHelper {
 		}
 		try {
 			let user = await usersData.findOne({ 'email.address': bodyData.email.toLowerCase() }, projection)
+			console.log(user)
 			if (!user) {
 				return common.failureResponse({
 					message: 'EMAIL_ID_NOT_REGISTERED',
@@ -181,6 +183,7 @@ module.exports = class AccountHelper {
 					responseCode: 'CLIENT_ERROR',
 				})
 			}
+			console.log(bodyData.password, user.password)
 			const isPasswordCorrect = bcryptJs.compareSync(bodyData.password, user.password)
 			if (!isPasswordCorrect) {
 				return common.failureResponse({
@@ -226,6 +229,7 @@ module.exports = class AccountHelper {
 				result,
 			})
 		} catch (error) {
+			console.log(error)
 			throw error
 		}
 	}
